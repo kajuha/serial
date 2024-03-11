@@ -23,9 +23,19 @@ find_package(ament_cmake REQUIRED)
 # let the compiler search for headers in the include folder
 
 include_directories(include)
+
+## Sources
+set(serial_SRCS
+    src/serial.cc
+    include/serial/serial.h
+    include/serial/v8stdint.h
+)
+# If unix
+list(APPEND serial_SRCS src/impl/unix.cc)
+list(APPEND serial_SRCS src/impl/list_ports/list_ports_linux.cc)
  
 # define a library target called serial
-add_library(serial src/serial.cc)
+add_library(serial ${serial_SRCS})
  
 # this line to exports the library
 ament_export_targets(serial HAS_LIBRARY_TARGET)
