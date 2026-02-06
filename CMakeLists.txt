@@ -36,6 +36,11 @@ list(APPEND serial_SRCS src/impl/list_ports/list_ports_linux.cc)
 
 # define a library target called serial
 add_library(serial SHARED ${serial_SRCS})
+ 
+# this line to exports the library
+ament_export_targets(serial HAS_LIBRARY_TARGET)
+ 
+# install the include/serial directory to the install/include/serial
 install(
   DIRECTORY include/serial
   DESTINATION include
