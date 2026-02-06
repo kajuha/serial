@@ -33,19 +33,14 @@ set(serial_SRCS
 # If unix
 list(APPEND serial_SRCS src/impl/unix.cc)
 list(APPEND serial_SRCS src/impl/list_ports/list_ports_linux.cc)
- 
+
 # define a library target called serial
-add_library(serial ${serial_SRCS})
- 
-# this line to exports the library
-ament_export_targets(serial HAS_LIBRARY_TARGET)
- 
-# install the include/serial directory to the install/include/serial
+add_library(serial SHARED ${serial_SRCS})
 install(
   DIRECTORY include/serial
   DESTINATION include
 )
- 
+
 install(
   TARGETS serial
   EXPORT serial
@@ -65,5 +60,12 @@ if(BUILD_TESTING)
   #set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+# Configure pkg-config file
+configure_file(serial.pc.in serial.pc @ONLY)
+
+# Install pkg-config file
+install(FILES ${CMAKE_BINARY_DIR}/serial.pc
+  DESTINATION lib/pkgconfig)
 
 ament_package()

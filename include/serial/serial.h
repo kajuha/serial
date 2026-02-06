@@ -48,6 +48,10 @@
 #define THROW(exceptionClass, message) throw exceptionClass(__FILE__, \
 __LINE__, (message) )
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 namespace serial {
 
 /*!
@@ -771,5 +775,9 @@ std::vector<PortInfo>
 list_ports();
 
 } // namespace serial
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

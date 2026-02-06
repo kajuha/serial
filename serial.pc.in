@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: serial
+Description: Cross-platform serial port library for C++
+Version: @PROJECT_VERSION@
+Libs: -L${libdir} -lserial
+Cflags: -I${includedir}
